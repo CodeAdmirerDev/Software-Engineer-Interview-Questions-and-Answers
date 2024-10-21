@@ -1,0 +1,318 @@
+Below is a curated list of 100 commonly asked ASP.NET Core Microservices interview questions along with detailed explanations where appropriate. 
+This list covers a wide range of topics including foundational concepts, architecture, data management, security, communication, and deployment strategies relevant to ASP.NET Core and microservices.
+
+### 1-10: Basic Concepts of Microservices
+1. What are microservices?
+   - Microservices are an architectural style that structures an application as a collection of small, autonomous services modeled around a business domain. These services communicate over a network and are independently deployable.
+
+2. What are the main advantages of using microservices?
+   - Scalability: Services can scale independently.
+   - Resilience: Failure of one service doesn't impact others.
+   - Flexibility: Different languages and technologies can be used.
+   - Development Speed: Smaller teams can work on different services simultaneously.
+
+3. How do microservices compare to monolithic architecture?
+   - Monolithic applications are built as a single unit, which can make them easier to develop initially but harder to maintain and scale over time. Microservices break down functionalities into manageable services.
+
+4. What challenges do microservices pose?
+   - Complexity in deployment, debugging, inter-service communication, and data management can be challenging. It can also increase network latency.
+
+5. What is bounded context in microservices?
+   - Bounded context is a design pattern in which a specific context defines the boundaries for a microservice, encapsulating its own data schema and logic.
+
+6. What is the single responsibility principle?
+   - Each microservice should have a single responsibility or purpose, focusing on a particular aspect of the business functionality.
+
+7. What does loose coupling refer to in microservices?
+   - Loose coupling means that services are independent of each other, allowing them to be modified or replaced without affecting other services.
+
+8. Explain the microservices architecture in ASP.NET Core.
+   - It involves creating small, self-contained services that communicate through APIs, using a framework like ASP.NET Core for building these services, and leveraging Docker or Kubernetes for deployment.
+
+9. What is a service mesh?
+   - A dedicated infrastructure layer that manages service-to-service communication, providing features like traffic management, load balancing, and security.
+
+10. What is a hybrid microservices architecture?
+    - A combination of monolithic and microservices architectures where certain components of a system operate as microservices, while others remain monolithic.
+
+### 11-20: ASP.NET Core Overview
+11. What is ASP.NET Core?
+    - ASP.NET Core is a cloud-optimized web framework designed for building modern web apps and services that can run on any platform.
+
+12. Explain the middleware in ASP.NET Core.
+    - Middleware are components assembled into an application pipeline to handle requests and responses. Each component has the ability to process requests and responses.
+
+13. What are the benefits of using dependency injection in ASP.NET Core?
+    - Facilitates the testing of components, promotes loose coupling, and improves the maintainability and flexibility of an application.
+
+14. How is configuration handled in ASP.NET Core?
+    - Configuration can be managed through various providers (JSON, XML, environment variables, command-line arguments) and supports a flexible binding to .NET objects.
+
+15. What is the difference between `IApplicationBuilder` and `IServiceCollection`?
+    - `IApplicationBuilder` is used for building the application pipeline, while `IServiceCollection` is used for configuring services and dependency injection.
+
+16. What is Kestrel in ASP.NET Core?
+    - Kestrel is a cross-platform web server for ASP.NET Core that handles HTTP requests. It can be used as a standalone server or behind another web server like IIS.
+
+17. How do you handle error handling in ASP.NET Core?
+    - Implement exception handling middleware that catches exceptions and formats responses consistently, or use `try-catch` blocks within controllers.
+
+18. What are Razor Pages?
+    - Razor Pages is a page-based programming model that makes coding page-focused scenarios easier and cleaner in ASP.NET Core applications.
+
+19. What is the role of the Startup class in ASP.NET Core?
+    - The Startup class is used to configure services and the application's request pipeline. It contains two methods: `ConfigureServices` and `Configure`.
+
+20. What is the API endpoint routing in ASP.NET Core?
+    - Routing is the mechanism for matching incoming HTTP requests to the corresponding endpoint in the application. ASP.NET Core uses attribute routing by default.
+
+### 21-30: RESTful Services
+21. What is REST?
+    - Representational State Transfer (REST) is an architectural style based on stateless communication and uses standard HTTP methods for CRUD operations.
+
+22. Explain the principles of RESTful design.
+    - Stateless interactions, resources identified by URIs, a uniform interface, and the use of standard HTTP methods.
+
+23. How do you implement a RESTful service in ASP.NET Core?
+    - By creating controllers that inherit from `ControllerBase` and using attributes like `[HttpGet]`, `[HttpPost]`, etc., to define routes.
+
+24. What are HTTP status codes and why are they important?
+    - HTTP status codes indicate the result of the server's processing of a request (e.g., 200 OK, 404 Not Found). They provide clients with feedback on their requests.
+
+25. What is API versioning and how can it be implemented in ASP.NET Core?
+    - API versioning helps manage changes and compatibility in APIs. It can be implemented using URL segment versioning, query string versioning, or header versioning.
+
+26. What is HATEOAS (Hypermedia as the Engine of Application State)?
+    - A constraint of REST that states that clients should interact with APIs dynamically through hypermedia links instead of hardcoded endpoints.
+
+27. How do you handle pagination in RESTful APIs?
+    - By implementing query parameters in the request that specify the page number and page size, and returning metadata about the pagination in the response.
+
+28. What is CORS and how do you enable it in ASP.NET Core?
+    - Cross-Origin Resource Sharing (CORS) allows restricted resources to be requested from another domain outside the domain from which the first resource was served. It can be enabled in ASP.NET Core through middleware configurations.
+
+29. What is gRPC and how does it compare to REST?
+    - gRPC is a high-performance RPC framework that uses HTTP/2 and Protocol Buffers. It is more efficient than REST for certain scenarios, especially for microservices.
+
+30. How does ASP.NET Core facilitate asynchronous programming?
+    - By utilizing async/await patterns, which improve performance by allowing non-blocking operations in I/O-bound work.
+
+### 31-40: Data Management
+31. What is Entity Framework Core?
+    - Entity Framework Core is a lightweight, open-source, cross-platform version of the popular Entity Framework data access technology, which allows for database operations in .NET applications.
+
+32. What is the repository pattern?
+    - The repository pattern abstracts the data access layer, providing an interface for accessing data sources while keeping the business logic separate.
+
+33. What strategies can be used for managing database migrations in microservices?
+    - Each microservice manages its own migrations independently to avoid tight coupling. Tools like FluentMigrator or EF Core’s migration feature can be used.
+
+34. What is CQRS (Command Query Responsibility Segregation)?
+    - CQRS is a pattern that separates read and write operations to optimize performance, scalability, and security within a system.
+
+35. How do you handle data consistency in distributed microservices?
+    - Implementing eventual consistency through patterns like Saga or using distributed transactions with solutions like Atomic Behavior Coordinator.
+
+36. What is a database per service pattern?
+    - Each microservice has its own database schema, promoting loose coupling and ensuring service autonomy.
+
+37. How can caching be implemented in microservices?
+    - Using distributed caches like Redis or in-memory caching through ASP.NET Core’s built-in caching mechanisms can help improve performance.
+
+38. How do you ensure data validation in ASP.NET Core applications?
+    - Using data annotation attributes on model properties (e.g., `[Required]`, `[StringLength]`), along with the model validation features built into ASP.NET Core.
+
+39. What is Dapper?
+    - Dapper is a lightweight ORM for .NET that offers performance advantages for data access, particularly with raw SQL queries compared to Entity Framework.
+
+40. What is a lightweight message broker?
+    - Tools like RabbitMQ or Apache Kafka that enable asynchronous communication between microservices using messages rather than direct service-to-service calls.
+
+### 41-50: Inter-Service Communication
+41. What are the two main types of service communication?
+    - Synchronous Communication: (e.g., HTTP/REST, gRPC)
+    - Asynchronous Communication: (e.g., message queues, event brokers)
+
+42. How do you implement synchronous communication between microservices?
+    - By using RESTful APIs with HTTP or RPC frameworks like gRPC.
+
+43. What is the purpose of service discovery?
+    - Service discovery helps services find each other dynamically, allowing them to communicate without hard-coded addresses.
+
+44. How do you achieve service discovery in a microservices architecture?
+    - Using platforms like Consul, Eureka, or Kubernetes for service registration and discovery.
+
+45. What is the Circuit Breaker pattern?
+    - A design pattern used to prevent a service from repeatedly trying to execute an action that is likely to fail, thus allowing it to recover.
+
+46. How do you implement load balancing in microservices?
+    - Using a load balancer (e.g., NGINX, AWS Elastic Load Balancing) to distribute incoming requests across multiple instances of a service.
+
+47. Explain the Event-Driven architecture?
+    - An architectural pattern where services communicate by producing and consuming events, promoting decoupling and scalability.
+
+48. What is a message broker and how does it work?
+    - A message broker (e.g., RabbitMQ, Kafka) facilitates communication between services through messages, allowing for asynchronous communication.
+
+49. How can you implement a publish-subscribe pattern in ASP.NET Core?
+    - Using a message broker to establish a communication channel where messages are published and subscribers receive messages of interest.
+
+50. What is the role of HTTP clients in microservices?
+    - HTTP clients allow microservices to make requests to other services, facilitating communication and data retrieval.
+
+### 51-60: Security
+51. How do you secure microservices in ASP.NET Core?
+    - Utilize JWT tokens for authentication and implement authorization middleware.
+
+52. What is authentication and authorization in ASP.NET Core?
+    - Authentication verifies the identity of users, while authorization determines which resources a user can access based on their roles or permissions.
+
+53. What is OAuth 2.0?
+    - OAuth 2.0 is an authorization framework that enables third-party applications to obtain limited access to an HTTP service.
+
+54. How can you implement rate limiting in microservices?
+    - Rate limiting can be implemented via middleware that tracks request frequencies and imposes limits based on predefined rules.
+
+55. What are security tokens, and how are they used?
+    - Security tokens (like JWT) are digitally signed tokens that transmit information between parties securely, often used for user authentication.
+
+56. What is HTTPS, and why is it important?
+    - HTTPS is a secure version of HTTP that encrypts data between a client and server, ensuring confidentiality and integrity of the data transmitted.
+
+57. How does Cross-Site Scripting (XSS) relate to microservices?
+    - XSS is an attack that injects malicious scripts into trusted websites. Proper input validation and output encoding can help mitigate such risks.
+
+58. What is Cross-Origin Resource Sharing (CORS), and when is it used?
+    - CORS is a protocol that enables web applications running at one origin to access resources from a different origin. It is used to manage security for web APIs.
+
+59. What types of security vulnerabilities should be mitigated in microservices?
+    - XSS, CSRF, SQL Injection, and insecure direct object references.
+
+60. How can you implement SSO (Single Sign-On) for microservices?
+    - Implement SSO using IdentityServer or Auth0, which centralizes user authentication across different services.
+
+### 61-70: Monitoring & Logging
+61. How do you implement logging in ASP.NET Core?
+    - Use the built-in logging framework, configuring different logging providers such as Console, Debug, and third-party logging frameworks like Serilog.
+
+62. What is distributed tracing in microservices?
+    - A method for monitoring applications, capturing the flow of requests through various services and tracking performance bottlenecks.
+
+63. How can you monitor the health of microservices?
+    - Implement health checks using the `HealthChecks` API in ASP.NET Core, allowing you to query the health status of your services.
+
+64. What are the best practices for logging in microservices?
+    - Maintain a consistent logging format, use structured logging, and centralize logs for easier management.
+
+65. What is Application Insights?
+    - A Microsoft Azure service that provides application performance management and monitoring capabilities, offering telemetry data for diagnosing issues.
+
+66. How can you implement metrics collection in microservices?
+    - Utilize libraries like Prometheus or Grafana to collect and aggregate metrics, providing insights into service performance.
+
+67. What is a logging aggregation tool?
+    - A tool that consolidates logs from multiple services into a central system for analysis. Examples include ELK Stack (Elasticsearch, Logstash, Kibana) and Splunk.
+
+68. How do you alert on specific events or errors in microservices?
+    - Set up monitoring alerts based on log data or metrics collected by monitoring tools.
+
+69. What is Serilog and how is it used?
+    - Serilog is a structured logging library for .NET applications that supports various output sinks and is often used for its rich logging capabilities.
+
+70. What is sidecar proxy?
+A sidecar proxy is a pattern where a proxy service runs alongside a microservice to handle communication, security, and monitoring.
+
+### 71-80: Deployment & DevOps
+
+71. How do you deploy microservices in Docker?
+   - By creating a Dockerfile for each microservice, defining the application environment, and using Docker Compose or Kubernetes for orchestration.
+
+72. What is Kubernetes?
+   - Kubernetes is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications.
+
+73. How do you implement CI/CD for microservices?
+   - By setting up a CI/CD pipeline using tools like Azure DevOps, Jenkins, or GitHub Actions, enabling automated builds, tests, and deployments for microservices.
+
+74. What is a service mesh, and why is it useful?
+   - A service mesh is an infrastructure layer that manages service-to-service communication, providing features like traffic management, resilience, and security.
+
+75. What are Helm charts?
+   - Helm charts are packages for Kubernetes applications, allowing developers to define, install, and manage applications running on Kubernetes clusters.
+
+76. How do you perform blue-green deployments?
+   - Blue-green deployment involves having two identical production environments (blue and green) and switching traffic between them during deployments to minimize downtime.
+
+77. What is canary deployment?
+   - Canary deployment is a technique where a new version of an application is rolled out to a small subset of users before a full deployment, allowing for testing in a live environment.
+
+78. What are the benefits of using containers for microservices?
+   - Containers provide consistency across environments, isolation, quick startup times, and resource efficiency, making them ideal for microservices architecture.
+
+79. How can you implement health checks in Kubernetes?
+   - By defining liveness and readiness probes in the pod specification, ensuring that Kubernetes can detect and manage the health of applications effectively.
+
+80. What is the 12-Factor App methodology?
+   - A set of best practices for building modern, scalable web applications, focusing on principles like codebase management, dependency isolation, and continuous deployment.
+
+### 81-90: Best Practices & Design Patterns
+81. What is the Circuit Breaker design pattern?
+   - A pattern that prevents a service from making requests to a failing service for a certain period, allowing system stability by stopping rapid retries.
+
+82. What is the Strangler Fig pattern?
+   - An approach to gradually replace legacy systems with new microservices by routing parts of the traffic to new services while keeping the old system in place.
+
+83. How do you manage cross-cutting concerns in microservices?
+   - Using middleware in frameworks like ASP.NET Core to handle concerns like logging, authentication, and error handling in a centralized manner.
+
+84. What is API Gateway?
+   - An API Gateway is a server that acts as a single entry point for clients to access multiple backend services, handling request routing, composition, and protocol translation.
+
+85. What is eventual consistency?
+   - A consistency model used in distributed systems where updates are not immediately visible across all nodes, but eventually all nodes will converge to a consistent state.
+
+86. Describe service decomposition in microservices architecture.
+   - The process of breaking down a monolithic application into smaller, manageable services based on business capabilities or domains.
+
+87. What are domain-driven design principles?
+   - A set of concepts focused on modeling software based on the business domain, prioritizing collaboration between technical and domain experts.
+
+88. What is the Saga pattern?
+   - A design pattern for managing distributed transactions, where each transaction is broken down into smaller local transactions coordinated by a saga coordinator.
+
+89. How do you ensure idempotency in microservices?
+   - By designing operations that can be repeated without changing the outcome, often by using unique request identifiers or ensuring that state changes are consistent.
+
+90. What is feature toggle?
+   - A technique to enable or disable features in an application dynamically, allowing for safer deployments and testing new functionality without affecting all users.
+
+### 91-100: Advanced Concepts & Challenges
+91. What challenges do you face when managing microservices?
+   - Challenges include service communication, data consistency, deployment complexity, monitoring, and managing configuration across multiple services.
+
+92. How do you handle service discovery in a cloud-native environment?
+   - By utilizing cloud-native tools like AWS Cloud Map or Azure Service Fabric, which provide built-in service discovery features for managing microservices.
+
+93. What is a sidecar pattern in microservices?
+   - A design pattern where a helper service (the sidecar) runs alongside the main service to support it with functionalities like logging, monitoring, or service discovery.
+
+94. How do you implement API security in microservices?
+   - By enforcing authentication and authorization, using HTTPS, validating inputs, and employing API gateway functionalities to secure endpoints.
+
+95. What is the purpose of an API contract?
+   - An API contract defines the expected interface, including request and response formats, helping teams to align on integration before implementation.
+
+96. How do you handle stateful services in a microservices architecture?
+   - By using external state management solutions (e.g., databases, distributed caches) instead of relying on the services themselves to manage state.
+
+97. What strategies can be used to optimize microservice communication?
+   - Implementing asynchronous messaging, batching requests, using gRPC for efficient RPC calls, and minimizing network calls with edge caching.
+
+98. How can you ensure backward compatibility in APIs?
+   - By following semantic versioning, maintaining older versions, and using feature flags to control access to new functionalities without breaking existing clients.
+
+99. What is the Repository pattern, and how does it apply to microservices?
+   - The Repository pattern abstracts data access, managing data retrieval and storage, which is particularly useful in microservices for maintaining a clean architecture.
+
+100. How can automated testing be effectively implemented in microservices?
+   - By utilizing unit, integration, and end-to-end testing strategies, along with CI/CD pipelines that run tests automatically for each service before deployment.
+
